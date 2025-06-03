@@ -1,0 +1,5 @@
+###
+GET http://localhost:8080/book
+Content-Type: application/json
+
+<> 2025-06-03T121522.200.json
