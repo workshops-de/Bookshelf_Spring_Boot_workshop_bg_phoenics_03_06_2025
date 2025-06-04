@@ -1,0 +1,17 @@
+
+application:
+  title: 'BlaBlub'
+  version: 'Version 5'
+  description: 'Description'
+springdoc:
+  api-docs:
+    enabled: false
+
+bookshelf:
+  title: 'My amazing bookshelf'
+  size: 1000
+  version: 'v1.0.0'
+  license:
+    name: 'MIT License'
+    url: "https://opensource.org/licenses/MIT"
+

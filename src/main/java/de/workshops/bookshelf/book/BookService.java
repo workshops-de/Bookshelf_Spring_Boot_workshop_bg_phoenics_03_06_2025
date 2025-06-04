@@ -1,5 +1,6 @@
 package de.workshops.bookshelf.book;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,5 +34,9 @@ public class BookService {
     return repository.findAllBooks().stream()
         .filter(book -> book.getIsbn().equals(searchRequest.isbn()) || book.getAuthor().contains(searchRequest.author()))
         .toList();
+  }
+
+  public Book createBook(@Valid Book book) {
+    return repository.saveBook(book);
   }
 }

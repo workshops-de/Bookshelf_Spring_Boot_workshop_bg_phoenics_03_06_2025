@@ -1,0 +1,5 @@
+springdoc:
+  api-docs:
+    enabled: true
+server:
+  port: 8081

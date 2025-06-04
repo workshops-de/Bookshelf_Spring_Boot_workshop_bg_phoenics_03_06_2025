@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -37,7 +37,7 @@ class BookRestController {
   }
 
   @GetMapping(params = "author")
-  ResponseEntity<List<Book>> getBooksByAuthor(@RequestParam(name = "author") @Size(min = 3) String anAuthor) {
+  ResponseEntity<List<Book>> getBooksByAuthor(@RequestParam(name = "author", required = false) @Size(min = 3) String anAuthor) {
     var booksByAuthor = service.getBooksByAuthor(anAuthor);
     if (booksByAuthor.isEmpty()) {
       return ResponseEntity.noContent().build();
@@ -48,6 +48,11 @@ class BookRestController {
   @PostMapping("search")
   List<Book> searchBook(@RequestBody @Valid BookSearchRequest searchRequest) {
     return service.searchBook(searchRequest);
+  }
+
+  @PostMapping
+  ResponseEntity<Book> createBook(@RequestBody @Valid Book book) {
+    return ResponseEntity.created(URI.create("book/"+ book.getIsbn())).body(service.createBook(book));
   }
 
   @ExceptionHandler(BookException.class)

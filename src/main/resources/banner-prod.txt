@@ -9,3 +9,4 @@ AppTitle: ${application.title}
 Version: ${application.version}
 Description: ${application.description}
 Spring Boot Version: ${spring-boot.version}
+PRODUCTION!!!

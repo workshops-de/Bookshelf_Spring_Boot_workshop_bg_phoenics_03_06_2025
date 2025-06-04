@@ -1,6 +1,7 @@
 package de.workshops.bookshelf;
 
 import de.workshops.bookshelf.book.BookException;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,5 +18,10 @@ public class GlobalExceptionHandler {
     problemDetail.setTitle("BookException");
     problemDetail.setProperty("category", "Explosion");
     return problemDetail;
+  }
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  ProblemDetail handleConstrainbtViolationException(Exception ex) {
+    return ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, ex.getMessage());
   }
 }
