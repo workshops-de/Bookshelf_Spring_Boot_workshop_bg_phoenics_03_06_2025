@@ -3,6 +3,7 @@ package de.workshops.bookshelf.book;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +52,7 @@ class BookRestController {
   }
 
   @PostMapping
+  @PreAuthorize("hasRole('ADMIN')")
   ResponseEntity<Book> createBook(@RequestBody @Valid Book book) {
     return ResponseEntity.created(URI.create("book/"+ book.getIsbn())).body(service.createBook(book));
   }

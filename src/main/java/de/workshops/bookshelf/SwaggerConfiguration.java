@@ -9,17 +9,18 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @Profile("dev")
-public class SwaggerConfiguration {
+class SwaggerConfiguration {
+
   @Bean
-  public OpenAPI api(SwaggerProperties swaggerProperties) {
+  OpenAPI api(SwaggerRecordProperties swaggerRecordProperties) {
     return new OpenAPI()
         .info(
             new Info()
-                .title(swaggerProperties.getTitle())
-                .version(swaggerProperties.getVersion())
-                .description("A simple API for a bookshelf for %d book".formatted(swaggerProperties.getSize()))
+                .title(swaggerRecordProperties.title())
+                .version(swaggerRecordProperties.version())
+                .description("A simple API for a bookshelf for %d book".formatted(swaggerRecordProperties.size()))
                 .license(new License()
-                    .name(swaggerProperties.getLicense().getName())
+                    .name(swaggerRecordProperties.license().name())
                     .url("https://opensource.org/licenses/MIT")
                 )
         );

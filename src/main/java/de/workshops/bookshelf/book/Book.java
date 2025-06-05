@@ -1,11 +1,28 @@
 package de.workshops.bookshelf.book;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.util.Objects;
 
+@Entity
 public class Book {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @JsonIgnore
+  private Long id;
+
   private String title;
+
+  @Column(length = 1024)
   private String description;
   private String author;
+
+  @Column(nullable = false)
   private String isbn;
 
   public String getTitle() {
@@ -60,5 +77,13 @@ public class Book {
         ", author='" + author + '\'' +
         ", isbn='" + isbn + '\'' +
         '}';
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public Long getId() {
+    return id;
   }
 }

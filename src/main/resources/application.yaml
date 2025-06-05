@@ -15,3 +15,34 @@ bookshelf:
     name: 'MIT License'
     url: "https://opensource.org/licenses/MIT"
 
+bshelf:
+  title: 'My amazing bookshelf'
+  size: 1000
+  version: 'v1.0.0'
+  license:
+    name: 'MIT License'
+    url: "https://opensource.org/licenses/MIT"
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookshelf
+    username: birgit
+    password: geheim
+  jpa:
+    open-in-view: false
+#    generate-ddl: true
+#    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: validate
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      mode: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

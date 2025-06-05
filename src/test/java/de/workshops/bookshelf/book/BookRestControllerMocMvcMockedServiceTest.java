@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -21,10 +22,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@SpringBootTest
-//@AutoConfigureMockMvc
-@WebMvcTest(BookRestController.class)
-@Import({BookService.class})
+@SpringBootTest
+@AutoConfigureMockMvc
+//@WebMvcTest(BookRestController.class)
+//@Import({BookService.class})
+@WithMockUser
 class BookRestControllerMocMvcMockedServiceTest {
 
   @Autowired
@@ -40,6 +42,7 @@ class BookRestControllerMocMvcMockedServiceTest {
   ArgumentCaptor<String> isbnCaptor;
 
   @Test
+  @WithMockUser(roles = "ADMIN")
   void getAllBooks() throws Exception {
     when(service.getAllBooks()).thenReturn(List.of(new Book(), new Book(), new Book()));
     mockMvc.perform(get("/book"))
